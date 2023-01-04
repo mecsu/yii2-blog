@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Categories */
+/* @var $model mecsu\blog\models\Categories */
 
 $this->title = Yii::t('app/modules/blog', 'View category');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/blog', 'Blog'), 'url' => ['posts/index']];

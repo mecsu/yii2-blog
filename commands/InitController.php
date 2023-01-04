@@ -1,6 +1,6 @@
 <?php
 
-namespace wdmg\blog\commands;
+namespace mecsu\blog\commands;
 
 use Yii;
 use yii\console\Controller;
@@ -48,9 +48,9 @@ class InitController extends Controller
             $selected = trim(fgets(STDIN));
 
         if ($selected == "1") {
-            Yii::$app->runAction('migrate/up', ['migrationPath' => '@vendor/wdmg/yii2-blog/migrations', 'interactive' => true]);
+            Yii::$app->runAction('migrate/up', ['migrationPath' => '@vendor/mecsu/yii2-blog/migrations', 'interactive' => true]);
         } else if($selected == "2") {
-            Yii::$app->runAction('migrate/down', ['migrationPath' => '@vendor/wdmg/yii2-blog/migrations', 'interactive' => true]);
+            Yii::$app->runAction('migrate/down', ['migrationPath' => '@vendor/mecsu/yii2-blog/migrations', 'interactive' => true]);
         } else {
             echo $this->ansiFormat("Error! Your selection has not been recognized.\n\n", Console::FG_RED);
             return ExitCode::UNSPECIFIED_ERROR;

@@ -1,8 +1,8 @@
 [![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.40-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
-[![Downloads](https://img.shields.io/packagist/dt/wdmg/yii2-blog.svg)](https://packagist.org/packages/wdmg/yii2-blog)
-[![Packagist Version](https://img.shields.io/packagist/v/wdmg/yii2-blog.svg)](https://packagist.org/packages/wdmg/yii2-blog)
+[![Downloads](https://img.shields.io/packagist/dt/mecsu/yii2-blog.svg)](https://packagist.org/packages/mecsu/yii2-blog)
+[![Packagist Version](https://img.shields.io/packagist/v/mecsu/yii2-blog.svg)](https://packagist.org/packages/mecsu/yii2-blog)
 ![Progress](https://img.shields.io/badge/progress-ready_to_use-green.svg)
-[![GitHub license](https://img.shields.io/github/license/wdmg/yii2-blog.svg)](https://github.com/wdmg/yii2-blog/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mecsu/yii2-blog.svg)](https://github.com/mecsu/yii2-blog/blob/master/LICENSE)
 
 <img src="./docs/images/yii2-blog.png" width="100%" alt="Yii2 Blog Module" />
 
@@ -27,7 +27,7 @@ Copyrights (c) 2019-2021 [W.D.M.Group, Ukraine](https://wdmg.com.ua/)
 # Installation
 To install the module, run the following command in the console:
 
-`$ composer require "wdmg/yii2-blog"`
+`$ composer require "mecsu/yii2-blog"`
 
 After configure db connection, run the following command in the console:
 
@@ -40,7 +40,7 @@ And select the operation you want to perform:
 # Migrations
 In any case, you can execute the migration and create the initial data, run the following command in the console:
 
-`$ php yii migrate --migrationPath=@vendor/wdmg/yii2-blog/migrations`
+`$ php yii migrate --migrationPath=@vendor/mecsu/yii2-blog/migrations`
 
 # Configure
 To add a module to the project, add the following data in your configuration file:
@@ -48,7 +48,7 @@ To add a module to the project, add the following data in your configuration fil
     'modules' => [
         ...
         'blog' => [
-            'class' => 'wdmg\blog\Module',
+            'class' => 'mecsu\blog\Module',
             'routePrefix' => 'admin',
             'baseRoute'  => '/blog', // route for frontend (string or array), use "/" - for root
             'baseLayout' => '@app/views/layouts/main', // the default layout to render blog

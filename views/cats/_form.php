@@ -8,7 +8,7 @@ use wdmg\widgets\LangSwitcher;
 use wdmg\widgets\AliasInput;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Categories */
+/* @var $model mecsu\blog\models\Categories */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Posts */
+/* @var $model mecsu\blog\models\Posts */
 
 if ($model->source_id)
     $this->title = Yii::t('app/modules/blog', 'New post version');

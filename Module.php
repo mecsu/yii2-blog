@@ -1,6 +1,6 @@
 <?php
 
-namespace wdmg\blog;
+namespace mecsu\blog;
 
 /**
  * Yii2 Blog
@@ -8,7 +8,7 @@ namespace wdmg\blog;
  * @category        Module
  * @version         1.2.4
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
- * @link            https://github.com/wdmg/yii2-blog
+ * @link            https://github.com/mecsu/yii2-blog
  * @copyright       Copyright (c) 2019 - 2021 W.D.M.Group, Ukraine
  * @license         https://opensource.org/licenses/MIT Massachusetts Institute of Technology (MIT) License
  *
@@ -26,7 +26,7 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'wdmg\blog\controllers';
+    public $controllerNamespace = 'mecsu\blog\controllers';
 
     /**
      * {@inheritdoc}

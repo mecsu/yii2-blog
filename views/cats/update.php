@@ -4,7 +4,7 @@ use wdmg\helpers\StringHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Categories */
+/* @var $model mecsu\blog\models\Categories */
 
 $this->title = Yii::t('app/modules/blog', 'Updating category: {name}', [
     'name' => $model->name,

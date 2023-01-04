@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 use wdmg\widgets\SelectInput;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Tags */
+/* @var $model mecsu\blog\models\Tags */
 
 $this->title = Yii::t('app/modules/blog', 'All tags');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/blog', 'Blog'), 'url' => ['tags/index']];

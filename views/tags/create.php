@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model wdmg\blog\models\Tags */
+/* @var $model mecsu\blog\models\Tags */
 
 $this->title = Yii::t('app/modules/blog', 'New tag');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app/modules/blog', 'Blog'), 'url' => ['posts/index']];

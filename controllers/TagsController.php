@@ -1,14 +1,14 @@
 <?php
 
-namespace wdmg\blog\controllers;
+namespace mecsu\blog\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use wdmg\blog\models\Tags;
-use wdmg\blog\models\TagsSearch;
+use mecsu\blog\models\Tags;
+use mecsu\blog\models\TagsSearch;
 
 /**
  * TagsController implements the CRUD actions for Blog model.

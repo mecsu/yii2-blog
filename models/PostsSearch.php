@@ -1,15 +1,15 @@
 <?php
 
-namespace wdmg\blog\models;
+namespace mecsu\blog\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use wdmg\blog\models\Posts;
-use wdmg\blog\models\Taxonomy;
+use mecsu\blog\models\Posts;
+use mecsu\blog\models\Taxonomy;
 
 /**
- * PostsSearch represents the model behind the search form of `wdmg\blog\models\Posts`.
+ * PostsSearch represents the model behind the search form of `mecsu\blog\models\Posts`.
  */
 class PostsSearch extends Posts
 {

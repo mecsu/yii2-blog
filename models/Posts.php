@@ -1,6 +1,6 @@
 <?php
 
-namespace wdmg\blog\models;
+namespace mecsu\blog\models;
 
 use Yii;
 use yii\db\Expression;
@@ -12,9 +12,9 @@ use yii\behaviors\BlameableBehavior;
 use yii\behaviors\SluggableBehavior;
 use wdmg\base\models\ActiveRecordML;
 use wdmg\validators\JsonValidator;
-use wdmg\blog\models\Categories;
-use wdmg\blog\models\Tags;
-use wdmg\blog\models\Taxonomy;
+use mecsu\blog\models\Categories;
+use mecsu\blog\models\Tags;
+use mecsu\blog\models\Taxonomy;
 
 /**
  * This is the model class for table "{{%blog_posts}}".

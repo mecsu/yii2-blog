@@ -1,14 +1,14 @@
 <?php
 
-namespace wdmg\blog\controllers;
+namespace mecsu\blog\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use wdmg\blog\models\Categories;
-use wdmg\blog\models\CategoriesSearch;
+use mecsu\blog\models\Categories;
+use mecsu\blog\models\CategoriesSearch;
 
 /**
  * CatsController implements the CRUD actions for Blog model.

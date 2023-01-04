@@ -1,12 +1,12 @@
 <?php
 
-namespace wdmg\blog\controllers;
+namespace mecsu\blog\controllers;
 
 use wdmg\helpers\ArrayHelper;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use wdmg\blog\models\Posts;
+use mecsu\blog\models\Posts;
 use yii\data\ActiveDataProvider;
 
 /**

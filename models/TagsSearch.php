@@ -1,13 +1,13 @@
 <?php
 
-namespace wdmg\blog\models;
+namespace mecsu\blog\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use wdmg\blog\models\Tags;
+use mecsu\blog\models\Tags;
 
 /**
- * TagsSearch represents the model behind the search form of `wdmg\blog\models\Tags`.
+ * TagsSearch represents the model behind the search form of `mecsu\blog\models\Tags`.
  */
 class TagsSearch extends Tags
 {

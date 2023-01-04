@@ -1,14 +1,14 @@
 {
-  "name": "wdmg/yii2-blog",
+  "name": "mecsu/yii2-blog",
   "description": "Publications manager",
-  "keywords": ["yii2", "yii2-blog", "blog", "wdmg"],
+  "keywords": ["yii2", "yii2-blog", "blog"],
   "type": "yii2-extension",
   "license": "MIT",
   "version": "1.2.4",
-  "homepage": "https://github.com/wdmg/yii2-blog",
+  "homepage": "https://github.com/mecsu/yii2-blog",
   "support": {
-    "source": "https://github.com/wdmg/yii2-blog",
-    "issues": "https://github.com/wdmg/yii2-blog/issues"
+    "source": "https://github.com/mecsu/yii2-blog",
+    "issues": "https://github.com/mecsu/yii2-blog/issues"
   },
   "authors": [
     {
@@ -33,7 +33,7 @@
   "minimum-stability": "dev",
   "autoload": {
     "psr-4": {
-      "wdmg\\blog\\": ""
+      "mecsu\\blog\\": ""
     }
   },
   "extra": {

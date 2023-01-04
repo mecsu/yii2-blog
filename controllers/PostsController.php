@@ -1,16 +1,16 @@
 <?php
 
-namespace wdmg\blog\controllers;
+namespace mecsu\blog\controllers;
 
-use wdmg\blog\models\Categories;
-use wdmg\blog\models\Taxonomy;
+use mecsu\blog\models\Categories;
+use mecsu\blog\models\Taxonomy;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use wdmg\blog\models\Posts;
-use wdmg\blog\models\PostsSearch;
+use mecsu\blog\models\Posts;
+use mecsu\blog\models\PostsSearch;
 
 /**
  * PostsController implements the CRUD actions for Blog model.
