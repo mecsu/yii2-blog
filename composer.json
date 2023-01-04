@@ -5,19 +5,16 @@
   "type": "yii2-extension",
   "license": "MIT",
   "version": "1.2.4",
-  "homepage": "https://github.com/mecsu/yii2-blog",
-  "support": {
-    "source": "https://github.com/mecsu/yii2-blog",
-    "issues": "https://github.com/mecsu/yii2-blog/issues"
-  },
   "authors": [
     {
-      "name": "Alexsander Vyshnyvetskyy",
-      "email": "alex.vyshnyvetskyy@gmail.com"
-    },
+      "name": "Xuan Nguyen",
+      "email": "xuanhn.vt@gmail.com"
+    }
+  ],
+  "repositories":[
     {
-      "name": "W.D.M.Group, Ukraine",
-      "email": "wdmg.com.ua@gmail.com"
+        "type": "git",
+        "url": "https://github.com/mecsu/yii2-blog"
     }
   ],
   "require": {
