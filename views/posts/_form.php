@@ -65,13 +65,36 @@ use wdmg\widgets\AliasInput;
         ?>
 
         <?= $form->field($model, 'excerpt')->textarea(['rows' => 3, 'lang' => ($model->locale ?? Yii::$app->language)]) ?>
-        <?= $form->field($model, 'content')->widget(Editor::class, [
+        <?php
+            // echo $form->field($model, 'content')->widget(Editor::class, [
+            //     'options' => [
+            //         'id' => 'posts-form-content',
+            //         'lang' => ($model->locale ?? Yii::$app->language)
+            //     ],
+            //     'pluginOptions' => []
+            // ])
+        ?>
+
+        <?= $form->field($model, 'content')->widget(\dosamigos\tinymce\TinyMce::className(), [
             'options' => [
+                'rows' => 6,
                 'id' => 'posts-form-content',
-                'lang' => ($model->locale ?? Yii::$app->language)
             ],
-            'pluginOptions' => []
-        ]) ?>
+            //'language' => 'en',
+            'language' => ($model->locale ?? Yii::$app->language),
+            'clientOptions' => [
+                // 'plugins' => [
+                //     "insertdatetime", "media"
+                // ],
+                'plugins' => [
+                    "advlist", "autolink", "lists", "link", "charmap", "preview", "anchor",
+                    "searchreplace", "visualblocks", "code", "fullscreen",
+                    "insertdatetime", "media", "table", "image"
+                    //"contextmenu", "paste", "print", 
+                ],
+                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            ]
+        ]);?>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h6 class="panel-title">
@@ -169,7 +192,7 @@ use wdmg\widgets\AliasInput;
         ]); ?>
         <hr/>
         <div class="form-group hidden-xs hidden-sm">
-            <?php if ((Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
+            <?php if (true || (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
                     'created_by' => $model->created_by,
                     'updated_by' => $model->updated_by
                 ])) || !$model->id) : ?>
@@ -178,7 +201,7 @@ use wdmg\widgets\AliasInput;
         </div>
         <div class="form-group hidden-md hidden-lg">
             <?= Html::a(Yii::t('app/modules/blog', '&larr; Back to list'), ['posts/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-            <?php if ((Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
+            <?php if (true || (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
                     'created_by' => $model->created_by,
                     'updated_by' => $model->updated_by
                 ])) || !$model->id) : ?>

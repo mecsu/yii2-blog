@@ -25,7 +25,8 @@
     "wdmg/yii2-helpers": "^1.4.2",
     "wdmg/yii2-editor": "^1.0.10",
     "wdmg/yii2-validators": "^1.0.6",
-    "wdmg/yii2-widgets": "^1.0.4"
+    "wdmg/yii2-widgets": "^1.0.4",
+    "2amigos/yii2-tinymce-widget": "~1.1"
   },
   "minimum-stability": "dev",
   "autoload": {
