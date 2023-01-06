@@ -80,19 +80,31 @@ use wdmg\widgets\AliasInput;
                 'rows' => 6,
                 'id' => 'posts-form-content',
             ],
-            //'language' => 'en',
-            'language' => ($model->locale ?? Yii::$app->language),
+            'language' => 'en',
+            //'language' => ($model->locale ?? Yii::$app->language),
             'clientOptions' => [
-                // 'plugins' => [
-                //     "insertdatetime", "media"
-                // ],
+                'file_picker_types' => 'image',
+                'file_picker_callback' => new yii\web\JsExpression("function (callback, value, meta) {
+                    var imageInput = $('#posts-temp_image').closest('.image-manager-input');
+                    var imageManager = imageInput.find('.open-modal-imagemanager');
+                    imageManager.click();
+                    $('#posts-temp_image').change(function () {
+                        //console.log($('#posts-temp_image_image').attr('src'));
+                        callback($('#posts-temp_image_image').attr('src'));
+                    });
+                }"),
+                // 'file_browser_callback' => new yii\web\JsExpression("function(field_name, url, type, win) {
+                //     window.open('".yii\helpers\Url::to(['/imagemanager/manager', 'view-mode'=>'iframe', 'select-type'=>'tinymce'])."&tag_name='+field_name,'','width=800,height=540 ,toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no');
+                // }"),
                 'plugins' => [
                     "advlist", "autolink", "lists", "link", "charmap", "preview", "anchor",
                     "searchreplace", "visualblocks", "code", "fullscreen",
-                    "insertdatetime", "media", "table", "image"
+                    "insertdatetime", "media", "table", "image", "fullscreen"
                     //"contextmenu", "paste", "print", 
                 ],
-                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | fullscreen",
+                'image_caption' => true,
+                'convert_urls' => false,
             ]
         ]);?>
         <div class="panel panel-default">
@@ -172,16 +184,35 @@ use wdmg\widgets\AliasInput;
             ]
         ]); ?>
 
+
         <?php
-        if ($model->image) {
-            echo '<div class="row">';
-            echo '<div class="col-xs-12 col-sm-3 col-md-2">' . Html::img($model->getImagePath(true) . '/' . $model->image, ['class' => 'img-responsive']) . '</div>';
-            echo '<div class="col-xs-12 col-sm-9 col-md-10">' . $form->field($model, 'file')->fileInput() . '</div>';
-            echo '</div><br/>';
-        } else {
-            echo $form->field($model, 'file')->fileInput();
-        }
+        echo $form->field($model, 'image')->widget(\app\modules\imagebrowser\components\ImageManagerInputWidget::className(), [
+            'aspectRatio' => (16/9), //set the aspect ratio
+            'showPreview' => true, //false to hide the preview
+            'showDeletePickedImageConfirm' => false, //on true show warning before detach image
+        ]);
+        // if ($model->image) {
+        //     echo '<div class="row">';
+        //     echo '<div class="col-xs-12 col-sm-3 col-md-2">' . Html::img($model->getImagePath(true) . '/' . $model->image, ['class' => 'img-responsive']) . '</div>';
+        //     echo '<div class="col-xs-12 col-sm-9 col-md-10">' . $form->field($model, 'file')->fileInput() . '</div>';
+        //     echo '</div><br/>';
+        // } else {
+        //     echo $form->field($model, 'file')->fileInput();
+        // }
         ?>
+
+        <div class="hide">
+            <?php 
+                echo $form->field($model, 'temp_image')->widget(\app\modules\imagebrowser\components\ImageManagerInputWidget::className(), [
+                    'aspectRatio' => (16/9), //set the aspect ratio
+                    'showPreview' => true, //false to hide the preview
+                    'showDeletePickedImageConfirm' => false, //on true show warning before detach image
+                    // 'options' => [
+                    //     'id' => 'temp_image_input_id'
+                    // ]
+                ]);
+            ?>
+        </div>
 
         <?= $form->field($model, 'status')->widget(SelectInput::class, [
             'items' => $statusModes,

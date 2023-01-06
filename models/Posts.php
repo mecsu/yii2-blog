@@ -42,6 +42,7 @@ use mecsu\blog\models\Taxonomy;
  */
 class Posts extends ActiveRecordML
 {
+    public $temp_image;
     public $route;
     public $baseRoute;
 
@@ -98,7 +99,7 @@ class Posts extends ActiveRecordML
             [['status', 'in_sitemap', 'in_rss', 'in_turbo', 'in_amp'], 'boolean'],
             ['alias', 'unique', 'message' => Yii::t('app/modules/blog', 'Param attribute must be unique.')],
             ['alias', 'match', 'pattern' => '/^[A-Za-z0-9\-\_]+$/', 'message' => Yii::t('app/modules/blog','It allowed only Latin alphabet, numbers and the «-», «_» characters.')],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at', 'temp_image'], 'safe'],
         ], parent::rules());
     }
 
@@ -420,8 +421,7 @@ class Posts extends ActiveRecordML
                 return Tags::find()->select($select)->asArray()->indexBy('id')->all();
             else
                 return Tags::find()->select($select)->all();
-        }
-    }
+
 
     /**
      * @return array
