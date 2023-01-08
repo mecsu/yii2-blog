@@ -421,6 +421,8 @@ class Posts extends ActiveRecordML
                 return Tags::find()->select($select)->asArray()->indexBy('id')->all();
             else
                 return Tags::find()->select($select)->all();
+        }
+    }
 
 
     /**
