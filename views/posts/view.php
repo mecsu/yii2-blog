@@ -63,7 +63,7 @@ if ($model->locale && isset(Yii::$app->translations) && class_exists('\wdmg\tran
                 'format' => 'html',
                 'value' => function($model) {
                     if ($model->image) {
-                        return Html::img($model->getImagePath(true) . '/' . $model->image, [
+                        return Html::img($model->image, [
                             'class' => 'img-thumbnail',
                             'style' => 'max-height: 160px'
                         ]);

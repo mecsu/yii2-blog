@@ -170,166 +170,166 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
                 }
             ],
 
-            [
-                'attribute' => 'common',
-                'label' => Yii::t('app/modules/blog','Common'),
-                'format' => 'html',
-                'headerOptions' => [
-                    'class' => 'text-center'
-                ],
-                'contentOptions' => [
-                    'class' => 'text-center'
-                ],
-                'value' => function($data) {
-                    $output = '';
-                    if ($data->in_sitemap)
-                        $output .= '<span class="fa fa-fw fa-sitemap text-success" title="' . Yii::t('app/modules/blog','Present in sitemap') . '"></span>';
-                    else
-                        $output .= '<span class="fa fa-fw fa-sitemap text-danger" title="' . Yii::t('app/modules/blog','Not present in sitemap') . '"></span>';
+            // [
+            //     'attribute' => 'common',
+            //     'label' => Yii::t('app/modules/blog','Common'),
+            //     'format' => 'html',
+            //     'headerOptions' => [
+            //         'class' => 'text-center'
+            //     ],
+            //     'contentOptions' => [
+            //         'class' => 'text-center'
+            //     ],
+            //     'value' => function($data) {
+            //         $output = '';
+            //         if ($data->in_sitemap)
+            //             $output .= '<span class="fa fa-fw fa-sitemap text-success" title="' . Yii::t('app/modules/blog','Present in sitemap') . '"></span>';
+            //         else
+            //             $output .= '<span class="fa fa-fw fa-sitemap text-danger" title="' . Yii::t('app/modules/blog','Not present in sitemap') . '"></span>';
 
-                    $output .= "&nbsp;";
+            //         $output .= "&nbsp;";
 
-                    if ($data->in_rss)
-                        $output .= '<span class="fa fa-fw fa-rss text-success" title="' . Yii::t('app/modules/blog','Present in RSS-feed') . '"></span>';
-                    else
-                        $output .= '<span class="fa fa-fw fa-rss text-danger" title="' . Yii::t('app/modules/blog','Not present in RSS-feed') . '"></span>';
+            //         if ($data->in_rss)
+            //             $output .= '<span class="fa fa-fw fa-rss text-success" title="' . Yii::t('app/modules/blog','Present in RSS-feed') . '"></span>';
+            //         else
+            //             $output .= '<span class="fa fa-fw fa-rss text-danger" title="' . Yii::t('app/modules/blog','Not present in RSS-feed') . '"></span>';
 
-                    $output .= "&nbsp;";
+            //         $output .= "&nbsp;";
 
-                    if ($data->in_turbo)
-                        $output .= '<span class="fa fa-fw fa-rocket text-success" title="' . Yii::t('app/modules/blog','Present in Yandex.Turbo') . '"></span>';
-                    else
-                        $output .= '<span class="fa fa-fw fa-rocket text-danger" title="' . Yii::t('app/modules/blog','Not present in Yandex.Turbo') . '"></span>';
+            //         if ($data->in_turbo)
+            //             $output .= '<span class="fa fa-fw fa-rocket text-success" title="' . Yii::t('app/modules/blog','Present in Yandex.Turbo') . '"></span>';
+            //         else
+            //             $output .= '<span class="fa fa-fw fa-rocket text-danger" title="' . Yii::t('app/modules/blog','Not present in Yandex.Turbo') . '"></span>';
 
-                    $output .= "&nbsp;";
+            //         $output .= "&nbsp;";
 
-                    if ($data->in_amp)
-                        $output .= '<span class="fa fa-fw fa-bolt text-success" title="' . Yii::t('app/modules/blog','Present in Google AMP') . '"></span>';
-                    else
-                        $output .= '<span class="fa fa-fw fa-bolt text-danger" title="' . Yii::t('app/modules/blog','Not present in Google AMP') . '"></span>';
+            //         if ($data->in_amp)
+            //             $output .= '<span class="fa fa-fw fa-bolt text-success" title="' . Yii::t('app/modules/blog','Present in Google AMP') . '"></span>';
+            //         else
+            //             $output .= '<span class="fa fa-fw fa-bolt text-danger" title="' . Yii::t('app/modules/blog','Not present in Google AMP') . '"></span>';
 
-                    return $output;
-                }
-            ],
-            [
-                'attribute' => 'locale',
-                'label' => Yii::t('app/modules/blog','Language versions'),
-                'format' => 'raw',
-                'filter' => SelectInput::widget([
-                    'model' => $searchModel,
-                    'attribute' => 'locale',
-                    'items' => $searchModel->getLanguagesList(true),
-                    'options' => [
-                        'id' => 'posts-list-locale',
-                        'class' => 'form-control'
-                    ]
-                ]),
-                'headerOptions' => [
-                    'class' => 'text-center',
-                    'style' => 'min-width:96px;'
-                ],
-                'contentOptions' => [
-                    'class' => 'text-center'
-                ],
-                'value' => function($data) use ($bundle) {
+            //         return $output;
+            //     }
+            // ],
+            // [
+            //     'attribute' => 'locale',
+            //     'label' => Yii::t('app/modules/blog','Language versions'),
+            //     'format' => 'raw',
+            //     'filter' => SelectInput::widget([
+            //         'model' => $searchModel,
+            //         'attribute' => 'locale',
+            //         'items' => $searchModel->getLanguagesList(true),
+            //         'options' => [
+            //             'id' => 'posts-list-locale',
+            //             'class' => 'form-control'
+            //         ]
+            //     ]),
+            //     'headerOptions' => [
+            //         'class' => 'text-center',
+            //         'style' => 'min-width:96px;'
+            //     ],
+            //     'contentOptions' => [
+            //         'class' => 'text-center'
+            //     ],
+            //     'value' => function($data) use ($bundle) {
 
-                    $output = [];
-                    $separator = ", ";
-                    $versions = $data->getAllVersions($data->id, true);
-                    $locales = ArrayHelper::map($versions, 'id', 'locale');
+            //         $output = [];
+            //         $separator = ", ";
+            //         $versions = $data->getAllVersions($data->id, true);
+            //         $locales = ArrayHelper::map($versions, 'id', 'locale');
 
-                    if (isset(Yii::$app->translations)) {
-                        foreach ($locales as $item_locale) {
+            //         if (isset(Yii::$app->translations)) {
+            //             foreach ($locales as $item_locale) {
 
-                            $locale = Yii::$app->translations->parseLocale($item_locale, Yii::$app->language);
+            //                 $locale = Yii::$app->translations->parseLocale($item_locale, Yii::$app->language);
 
-                            if ($item_locale === $locale['locale']) { // Fixing default locale from PECL intl
+            //                 if ($item_locale === $locale['locale']) { // Fixing default locale from PECL intl
 
-                                if (!($country = $locale['domain']))
-                                    $country = '_unknown';
+            //                     if (!($country = $locale['domain']))
+            //                         $country = '_unknown';
 
-                                $flag = \yii\helpers\Html::img($bundle->baseUrl . '/flags-iso/flat/24/' . $country . '.png', [
-                                    'alt' => $locale['name']
-                                ]);
+            //                     $flag = \yii\helpers\Html::img($bundle->baseUrl . '/flags-iso/flat/24/' . $country . '.png', [
+            //                         'alt' => $locale['name']
+            //                     ]);
 
-                                if ($data->locale === $locale['locale']) // It`s source version
-                                    $output[] = Html::a($flag,
-                                        [
-                                            'posts/update', 'id' => $data->id
-                                        ], [
-                                            'title' => Yii::t('app/modules/blog','Edit source version: {language}', [
-                                                'language' => $locale['name']
-                                            ])
-                                        ]
-                                    );
-                                else  // Other localization versions
-                                    $output[] = Html::a($flag,
-                                        [
-                                            'posts/update', 'id' => $data->id,
-                                            'locale' => $locale['locale']
-                                        ], [
-                                            'title' => Yii::t('app/modules/blog','Edit language version: {language}', [
-                                                'language' => $locale['name']
-                                            ])
-                                        ]
-                                    );
+            //                     if ($data->locale === $locale['locale']) // It`s source version
+            //                         $output[] = Html::a($flag,
+            //                             [
+            //                                 'posts/update', 'id' => $data->id
+            //                             ], [
+            //                                 'title' => Yii::t('app/modules/blog','Edit source version: {language}', [
+            //                                     'language' => $locale['name']
+            //                                 ])
+            //                             ]
+            //                         );
+            //                     else  // Other localization versions
+            //                         $output[] = Html::a($flag,
+            //                             [
+            //                                 'posts/update', 'id' => $data->id,
+            //                                 'locale' => $locale['locale']
+            //                             ], [
+            //                                 'title' => Yii::t('app/modules/blog','Edit language version: {language}', [
+            //                                     'language' => $locale['name']
+            //                                 ])
+            //                             ]
+            //                         );
 
-                            }
+            //                 }
 
-                        }
-                        $separator = "";
-                    } else {
-                        foreach ($locales as $locale) {
-                            if (!empty($locale)) {
+            //             }
+            //             $separator = "";
+            //         } else {
+            //             foreach ($locales as $locale) {
+            //                 if (!empty($locale)) {
 
-                                if (extension_loaded('intl'))
-                                    $language = mb_convert_case(trim(\Locale::getDisplayLanguage($locale, Yii::$app->language)), MB_CASE_TITLE, "UTF-8");
-                                else
-                                    $language = $locale;
+            //                     if (extension_loaded('intl'))
+            //                         $language = mb_convert_case(trim(\Locale::getDisplayLanguage($locale, Yii::$app->language)), MB_CASE_TITLE, "UTF-8");
+            //                     else
+            //                         $language = $locale;
 
-                                if ($data->locale === $locale) // It`s source version
-                                    $output[] = Html::a($language,
-                                        [
-                                            'posts/update', 'id' => $data->id
-                                        ], [
-                                            'title' => Yii::t('app/modules/blog','Edit source version: {language}', [
-                                                'language' => $language
-                                            ])
-                                        ]
-                                    );
-                                else  // Other localization versions
-                                    $output[] = Html::a($language,
-                                        [
-                                            'posts/update', 'id' => $data->id,
-                                            'locale' => $locale
-                                        ], [
-                                            'title' => Yii::t('app/modules/blog','Edit language version: {language}', [
-                                                'language' => $language
-                                            ])
-                                        ]
-                                    );
-                            }
-                        }
-                    }
+            //                     if ($data->locale === $locale) // It`s source version
+            //                         $output[] = Html::a($language,
+            //                             [
+            //                                 'posts/update', 'id' => $data->id
+            //                             ], [
+            //                                 'title' => Yii::t('app/modules/blog','Edit source version: {language}', [
+            //                                     'language' => $language
+            //                                 ])
+            //                             ]
+            //                         );
+            //                     else  // Other localization versions
+            //                         $output[] = Html::a($language,
+            //                             [
+            //                                 'posts/update', 'id' => $data->id,
+            //                                 'locale' => $locale
+            //                             ], [
+            //                                 'title' => Yii::t('app/modules/blog','Edit language version: {language}', [
+            //                                     'language' => $language
+            //                                 ])
+            //                             ]
+            //                         );
+            //                 }
+            //             }
+            //         }
 
 
-                    if (is_countable($output)) {
-                        if (count($output) > 0) {
-                            $onMore = false;
-                            if (count($output) > 3)
-                                $onMore = true;
+            //         if (is_countable($output)) {
+            //             if (count($output) > 0) {
+            //                 $onMore = false;
+            //                 if (count($output) > 3)
+            //                     $onMore = true;
 
-                            if ($onMore)
-                                return join(array_slice($output, 0, 3), $separator) . "&nbsp;…";
-                            else
-                                return join($separator, $output);
+            //                 if ($onMore)
+            //                     return join(array_slice($output, 0, 3), $separator) . "&nbsp;…";
+            //                 else
+            //                     return join($separator, $output);
 
-                        }
-                    }
+            //             }
+            //         }
 
-                    return null;
-                }
-            ],
+            //         return null;
+            //     }
+            // ],
             [
                 'attribute' => 'status',
                 'format' => 'html',
@@ -360,6 +360,7 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
 
             [
                 'class' => 'yii\grid\ActionColumn',
+                //'template' => '{update} {delete}',
                 'header' => Yii::t('app/modules/blog','Actions'),
                 'headerOptions' => [
                     'class' => 'text-center'
