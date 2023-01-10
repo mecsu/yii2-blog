@@ -40,26 +40,31 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
                 'value' => function($model) {
                     $output = Html::tag('strong', $model->name);
                     if (($postURL = $model->getPostUrl(true, true)) && $model->id) {
-                        $output .= '<br/>' . Html::a($model->getUrl(true), $postURL, [
+                        $viewText = Yii::t('app/modules/blog', 'Preview');
+                        if($model->status == $model::STATUS_PUBLISHED)
+                        {
+                            $viewText = Yii::t('app/modules/blog', 'View');
+                        }
+                        $output .= '<br/>' . Html::a($viewText, $postURL, [
                             'target' => '_blank',
                             'data-pjax' => 0
                         ]);
                     }
 
-                    if (isset(Yii::$app->redirects) && $model->url && ($model->status == $model::STATUS_PUBLISHED)) {
-                        if ($url = Yii::$app->redirects->check($model->url, false)) {
-                            $output .= '&nbsp' . Html::tag('span', '', [
-                                'class' => "text-danger fa fa-exclamation-circle",
-                                'data' => [
-                                    'toggle' => "tooltip",
-                                    'placement' => "top"
-                                ],
-                                'title' => Yii::t('app/modules/redirects', 'For this URL is active redirect to {url}', [
-                                    'url' => $url
-                                ])
-                            ]);
-                        }
-                    }
+                    // if (isset(Yii::$app->redirects) && $model->url && ($model->status == $model::STATUS_PUBLISHED)) {
+                    //     if ($url = Yii::$app->redirects->check($model->url, false)) {
+                    //         $output .= '&nbsp' . Html::tag('span', '', [
+                    //             'class' => "text-danger fa fa-exclamation-circle",
+                    //             'data' => [
+                    //                 'toggle' => "tooltip",
+                    //                 'placement' => "top"
+                    //             ],
+                    //             'title' => Yii::t('app/modules/redirects', 'For this URL is active redirect to {url}', [
+                    //                 'url' => $url
+                    //             ])
+                    //         ]);
+                    //     }
+                    // }
                     return $output;
                 }
             ],
@@ -360,7 +365,7 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                //'template' => '{update} {delete}',
+                'template' => '{update} {delete}',
                 'header' => Yii::t('app/modules/blog','Actions'),
                 'headerOptions' => [
                     'class' => 'text-center'
@@ -369,80 +374,80 @@ if (isset(Yii::$app->translations) && class_exists('\wdmg\translations\FlagsAsse
                     'class' => 'text-center'
                 ],
                 'buttons'=> [
-                    'view' => function($url, $data, $key) {
-                        $output = [];
-                        $versions = $data->getAllVersions($data->id, true);
-                        $locales = ArrayHelper::map($versions, 'id', 'locale');
-                        if (isset(Yii::$app->translations)) {
-                            foreach ($locales as $item_locale) {
-                                $locale = Yii::$app->translations->parseLocale($item_locale, Yii::$app->language);
-                                if ($item_locale === $locale['locale']) { // Fixing default locale from PECL intl
+                    // 'view' => function($url, $data, $key) {
+                    //     $output = [];
+                    //     $versions = $data->getAllVersions($data->id, true);
+                    //     $locales = ArrayHelper::map($versions, 'id', 'locale');
+                    //     if (isset(Yii::$app->translations)) {
+                    //         foreach ($locales as $item_locale) {
+                    //             $locale = Yii::$app->translations->parseLocale($item_locale, Yii::$app->language);
+                    //             if ($item_locale === $locale['locale']) { // Fixing default locale from PECL intl
 
-                                    if ($data->locale === $locale['locale']) // It`s source version
-                                        $output[] = Html::a(Yii::t('app/modules/blog','View source version: {language}', [
-                                            'language' => $locale['name']
-                                        ]), ['posts/view', 'id' => $data->id]);
-                                    else  // Other localization versions
-                                        $output[] = Html::a(Yii::t('app/modules/blog','View language version: {language}', [
-                                            'language' => $locale['name']
-                                        ]), ['posts/view', 'id' => $data->id, 'locale' => $locale['locale']]);
+                    //                 if ($data->locale === $locale['locale']) // It`s source version
+                    //                     $output[] = Html::a(Yii::t('app/modules/blog','View source version: {language}', [
+                    //                         'language' => $locale['name']
+                    //                     ]), ['posts/view', 'id' => $data->id]);
+                    //                 else  // Other localization versions
+                    //                     $output[] = Html::a(Yii::t('app/modules/blog','View language version: {language}', [
+                    //                         'language' => $locale['name']
+                    //                     ]), ['posts/view', 'id' => $data->id, 'locale' => $locale['locale']]);
 
-                                }
-                            }
-                        } else {
-                            foreach ($locales as $locale) {
-                                if (!empty($locale)) {
+                    //             }
+                    //         }
+                    //     } else {
+                    //         foreach ($locales as $locale) {
+                    //             if (!empty($locale)) {
 
-                                    if (extension_loaded('intl'))
-                                        $language = mb_convert_case(trim(\Locale::getDisplayLanguage($locale, Yii::$app->language)), MB_CASE_TITLE, "UTF-8");
-                                    else
-                                        $language = $locale;
+                    //                 if (extension_loaded('intl'))
+                    //                     $language = mb_convert_case(trim(\Locale::getDisplayLanguage($locale, Yii::$app->language)), MB_CASE_TITLE, "UTF-8");
+                    //                 else
+                    //                     $language = $locale;
 
-                                    if ($data->locale === $locale) // It`s source version
-                                        $output[] = Html::a(Yii::t('app/modules/blog','View source version: {language}', [
-                                            'language' => $language
-                                        ]), ['posts/view', 'id' => $data->id]);
-                                    else  // Other localization versions
-                                        $output[] = Html::a(Yii::t('app/modules/blog','View language version: {language}', [
-                                            'language' => $language
-                                        ]), ['posts/view', 'id' => $data->id, 'locale' => $locale]);
+                    //                 if ($data->locale === $locale) // It`s source version
+                    //                     $output[] = Html::a(Yii::t('app/modules/blog','View source version: {language}', [
+                    //                         'language' => $language
+                    //                     ]), ['posts/view', 'id' => $data->id]);
+                    //                 else  // Other localization versions
+                    //                     $output[] = Html::a(Yii::t('app/modules/blog','View language version: {language}', [
+                    //                         'language' => $language
+                    //                     ]), ['posts/view', 'id' => $data->id, 'locale' => $locale]);
 
-                                }
-                            }
-                        }
+                    //             }
+                    //         }
+                    //     }
 
-                        if (is_countable($output)) {
-                            if (count($output) > 1) {
-                                $html = '';
-                                $html .= '<div class="btn-group">';
-                                $html .= Html::a(
-                                    '<span class="glyphicon glyphicon-eye-open"></span> ' .
-                                    Yii::t('app/modules/blog', 'View') .
-                                    ' <span class="caret"></span>',
-                                    '#',
-                                    [
-                                        'class' => "btn btn-block btn-link btn-xs dropdown-toggle",
-                                        'data-toggle' => "dropdown",
-                                        'aria-haspopup' => "true",
-                                        'aria-expanded' => "false"
-                                    ]);
-                                $html .= '<ul class="dropdown-menu dropdown-menu-right">';
-                                $html .= '<li>' . implode("</li><li>", $output) . '</li>';
-                                $html .= '</ul>';
-                                $html .= '</div>';
-                                return $html;
-                            }
-                        }
-                        return Html::a('<span class="glyphicon glyphicon-eye-open"></span> ' .
-                            Yii::t('app/modules/blog', 'View'),
-                            [
-                                'posts/view',
-                                'id' => $data->id
-                            ], [
-                                'class' => 'btn btn-link btn-xs'
-                            ]
-                        );
-                    },
+                    //     if (is_countable($output)) {
+                    //         if (count($output) > 1) {
+                    //             $html = '';
+                    //             $html .= '<div class="btn-group">';
+                    //             $html .= Html::a(
+                    //                 '<span class="glyphicon glyphicon-eye-open"></span> ' .
+                    //                 Yii::t('app/modules/blog', 'View') .
+                    //                 ' <span class="caret"></span>',
+                    //                 '#',
+                    //                 [
+                    //                     'class' => "btn btn-block btn-link btn-xs dropdown-toggle",
+                    //                     'data-toggle' => "dropdown",
+                    //                     'aria-haspopup' => "true",
+                    //                     'aria-expanded' => "false"
+                    //                 ]);
+                    //             $html .= '<ul class="dropdown-menu dropdown-menu-right">';
+                    //             $html .= '<li>' . implode("</li><li>", $output) . '</li>';
+                    //             $html .= '</ul>';
+                    //             $html .= '</div>';
+                    //             return $html;
+                    //         }
+                    //     }
+                    //     return Html::a('<span class="glyphicon glyphicon-eye-open"></span> ' .
+                    //         Yii::t('app/modules/blog', 'View'),
+                    //         [
+                    //             'posts/view',
+                    //             'id' => $data->id
+                    //         ], [
+                    //             'class' => 'btn btn-link btn-xs'
+                    //         ]
+                    //     );
+                    // },
                     'update' => function($url, $data, $key) {
 
                         if (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && !Yii::$app->user->can('updatePosts', [

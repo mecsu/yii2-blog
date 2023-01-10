@@ -18,7 +18,17 @@ $this->params['breadcrumbs'][] = Yii::t('app/modules/blog', 'Updating');
     'updated_by' => $model->updated_by
 ])) : ?>
     <div class="page-header">
-        <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
+        <h1><?= Html::encode($this->title) ?>
+            <?php
+                    if ($model->status == $model::STATUS_PUBLISHED)
+                    echo '<small class="label label-success">'.Yii::t('app/modules/blog','Published').'</small>';
+                elseif ($model->status == $model::STATUS_DRAFT)
+                    echo '<small class="label label-default">'.Yii::t('app/modules/blog','Draft').'</small>';
+                else
+                    echo $model->status;
+            ?>
+            <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small>
+        </h1>
     </div>
     <div class="blog-update">
         <?= $this->render('_form', [

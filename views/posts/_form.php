@@ -48,7 +48,7 @@ use wdmg\widgets\AliasInput;
                 'save' => Yii::t('app/modules/blog', 'Save')
             ],
             'options' => [
-                'baseUrl' => ($model->id) ? $model->url : Url::to($model->getRoute(), true)
+                'baseUrl' => ($model->id) ? "https://mecsu.vn/blog/{$model->alias}": "https://mecsu.vn/blog/"
             ]
         ])->label(Yii::t('app/modules/blog', 'Post URL')); ?>
 
@@ -156,7 +156,29 @@ use wdmg\widgets\AliasInput;
             <hr/>
             <div class="form-group">
                 <?= Html::a(Yii::t('app/modules/blog', '&larr; Back to list'), ['posts/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
-                <?= Html::submitButton(Yii::t('app/modules/blog', 'Save'), ['class' => 'btn btn-save btn-success pull-right']) ?>
+                <div class="form-group pull-right">
+                <?php if (true || (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
+                    'created_by' => $model->created_by,
+                    'updated_by' => $model->updated_by
+                ])) || !$model->id) { ?>
+                    <?php if(empty($model->id)) {
+                     echo Html::submitButton(Yii::t('app/modules/blog', 'Save as draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                     echo Html::submitButton(Yii::t('app/modules/blog', 'Publish'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                    } else {
+                        if($model->status == $model::STATUS_PUBLISHED) {
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Switch to draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Save'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                        }
+                        else
+                        {
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Save as draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Preview'), ['class' => 'btn btn-info pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-preview']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Publish'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                        }
+                    }
+                    ?>
+                <?php } ?>
+                </div>
             </div>
         </div>
     </div>
@@ -214,30 +236,41 @@ use wdmg\widgets\AliasInput;
             ?>
         </div>
 
-        <?= $form->field($model, 'status')->widget(SelectInput::class, [
-            'items' => $statusModes,
-            'options' => [
-                'id' => 'posts-form-status',
-                'class' => 'form-control'
-            ]
-        ]); ?>
-        <hr/>
-        <div class="form-group hidden-xs hidden-sm">
-            <?php if (true || (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
-                    'created_by' => $model->created_by,
-                    'updated_by' => $model->updated_by
-                ])) || !$model->id) : ?>
-                <?= Html::submitButton(Yii::t('app/modules/blog', 'Save'), ['class' => 'btn btn-save btn-block btn-success pull-right']) ?>
-            <?php endif; ?>
+        <div class="hide">
+            <?php
+                echo $form->field($model, 'status')->widget(SelectInput::class, [
+                    'items' => $statusModes,
+                    'options' => [
+                        'id' => 'posts-form-status',
+                        'class' => 'form-control'
+                    ]
+                ]);
+            ?>
         </div>
+        <hr/>
         <div class="form-group hidden-md hidden-lg">
             <?= Html::a(Yii::t('app/modules/blog', '&larr; Back to list'), ['posts/index'], ['class' => 'btn btn-default pull-left']) ?>&nbsp;
             <?php if (true || (Yii::$app->authManager && $this->context->module->moduleExist('rbac') && Yii::$app->user->can('updatePosts', [
                     'created_by' => $model->created_by,
                     'updated_by' => $model->updated_by
-                ])) || !$model->id) : ?>
-                <?= Html::submitButton(Yii::t('app/modules/blog', 'Save'), ['class' => 'btn btn-success pull-right']) ?>
-            <?php endif; ?>
+                ])) || !$model->id) { ?>
+                    <?php if(empty($model->id)) {
+                     echo Html::submitButton(Yii::t('app/modules/blog', 'Save as draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                     echo Html::submitButton(Yii::t('app/modules/blog', 'Publish'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                    } else {
+                        if($model->status == $model::STATUS_PUBLISHED) {
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Switch to draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Save'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                        }
+                        else
+                        {
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Save as draft'), ['class' => 'btn btn-warning pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-draft']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Preview'), ['class' => 'btn btn-info pull-right', 'style' => 'margin-left: 5px', 'name' => 'save-preview']);
+                            echo Html::submitButton(Yii::t('app/modules/blog', 'Publish'), ['class' => 'btn btn-save btn-success pull-right', 'name' => 'save-publish']);
+                        }
+                    }
+                    ?>
+                <?php } ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

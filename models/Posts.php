@@ -596,6 +596,11 @@ class Posts extends ActiveRecordML
      */
     public function getPostUrl($withScheme = true, $realUrl = false)
     {
+        if($this->status === self::STATUS_PUBLISHED)
+        {
+            // build slug url with hash
+            return "https://mecsu.vn/blog/{$this->alias}";
+        }
         return $this->getModelUrl($withScheme, $realUrl);
     }
 
@@ -623,4 +628,19 @@ class Posts extends ActiveRecordML
             return $this->hasOne(\app\modules\users\models\Users::class, ['user_id' => 'updated_by']);
         return parent::getUpdatedBy();
     }
+
+    /**
+     * Returns the URL to the view of the current model
+     *
+     * @return string|null
+     */
+    // public function getUrl($withScheme = true)
+    // {
+    //     if($this->status === self::STATUS_PUBLISHED)
+    //     {
+    //         // build slug url with hash
+    //         return "https://mecsu.vn/blog/{$this->alias}";
+    //     }
+    //     return $this->getUrl();
+    // }
 }

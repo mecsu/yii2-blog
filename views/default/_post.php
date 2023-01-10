@@ -16,11 +16,13 @@ use yii\helpers\HtmlPurifier;
                     <div class="entry__blog">
                         <div class="blog__post--header mb-30">
                             <h1 class="post__header--title mb-15"><?= Html::encode($model->title); ?></h1>
-                            <p class="blog__post--meta">Được viết bởi  / On : May 26, 2022</p>                                     
+                            <p class="blog__post--meta">
+                                <?= (!empty($model->createdBy) ? $model->createdBy->username . ' - ' : '') . date('d/m/y', strtotime($model->created_at))?>
+                            </p>                                    
                         </div>
 
                         <div class="blog__details--content">
-                            <h3 class="blog__details--content__subtitle mb-25"><?= Html::encode($model->excerpt); ?></h3>
+                            <p class="blog__details--content__excerpt mb-25"><?= Html::encode($model->excerpt); ?></p>
                             <?php if ($model->image) { ?>
                                 <div class="blog__thumbnail mb-30">
                                     <img class="blog__thumbnail--img border-radius-10" src="<?= $model->image ?>" alt="<?= Html::encode($model->title); ?>">
@@ -35,16 +37,17 @@ use yii\helpers\HtmlPurifier;
                             <p class="blog__details--content__desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus sapiente omnis sunt labore mollitia, quaerat incidunt sequi, ut alias accusamus nostrum magni fugit facilis dignissimos illum repellendus et numquam adipisci quos. Eos omnis maiores beatae cum a consequatur magnam sequi neque, at numquam qui ipsam unde veritatis voluptates quam dicta! Ipsam, mollitia illo fuga vel culpa reprehenderit quisquam maxime nesciunt. Sunt quaerat inventore aspernatur quibusdam corrupti numquam mollitia exercitationem rem alias consectetur hic iusto dignissimos nostrum odio, cumque impedit.</p> -->
                         </div>
                     </div>
+                    <?php $tags = $model->getTags($model->id, true); if(!empty($tags)) { ?>
                     <div class="blog__tags--social__media d-flex align-items-center justify-content-between">
-                        <div class="blog__tags--media d-flex align-items-center">
-                            <label class="blog__tags--media__title">Releted Tags :</label>
-                            <ul class="d-flex">
-                                <li class="blog__tags--media__list"><a class="blog__tags--media__link" href="blog.html">Popular</a></li>
-                                <li class="blog__tags--media__list"><a class="blog__tags--media__link" href="blog.html">Business</a></li>
-                                <li class="blog__tags--media__list"><a class="blog__tags--media__link" href="blog.html">desgin</a></li>
-                                <li class="blog__tags--media__list"><a class="blog__tags--media__link" href="blog.html">Service</a></li>
-                            </ul>
-                        </div>
+                        
+                            <div class="blog__tags--media d-flex align-items-center">
+                                <label class="blog__tags--media__title">Releted Tags :</label>
+                                <ul class="d-flex">
+                                    <?php foreach(\yii\helpers\ArrayHelper::getColumn($tags, 'name') as $tag) { ?>
+                                        <li class="blog__tags--media__list"><a class="blog__tags--media__link" href="#"><?= $tag ?></a></li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
                         <!-- <div class="blog__social--media d-flex align-items-center">
                             <label class="blog__social--media__title">Social Share :</label>
                             <ul class="d-flex">
@@ -83,6 +86,8 @@ use yii\helpers\HtmlPurifier;
                             </ul>
                         </div> -->
                     </div>
+
+                    <?php } ?>
                     <div class="related__post--area mb-50">
                         <div class="section__heading border-bottom mb-30">
                             <h2 class="section__heading--maintitle">Related <span>Articles</span></h2>

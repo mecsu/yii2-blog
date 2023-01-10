@@ -38,7 +38,7 @@ class PostsController extends Controller
                 'class' => VerbFilter::class,
                 'actions' => [
                     'index' => ['get'],
-                    'view' => ['get'],
+                    //'view' => ['get'],
                     'delete' => ['post'],
                     'create' => ['get', 'post'],
                     'update' => ['get', 'post'],
@@ -174,8 +174,13 @@ class PostsController extends Controller
             return $this->asJson($response);
         }
 
+        $postData = Yii::$app->request->post();
         if (Yii::$app->request->isAjax) {
             if ($model->load(Yii::$app->request->post())) {
+                if(isset($postData['save-publish']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_PUBLISHED;
+                }
                 if ($model->validate())
                     $success = true;
                 else
@@ -184,8 +189,12 @@ class PostsController extends Controller
                 return $this->asJson(['success' => $success, 'alias' => $model->alias, 'errors' => $model->errors]);
             }
         } else {
+            $postData = Yii::$app->request->post();
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
+                if(isset($postData['save-publish']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_PUBLISHED;
+                }
                 // Get image thumbnail
                 $image = \yii\web\UploadedFile::getInstance($model, 'file');
                 if ($src = $model->upload($image))
@@ -264,8 +273,18 @@ class PostsController extends Controller
         // Get current URL before save this blog post
         $oldPostUrl = $model->getPostUrl(false);
 
+        $postData = Yii::$app->request->post();
         if (Yii::$app->request->isAjax) {
             if ($model->load(Yii::$app->request->post())) {
+                if(isset($postData['save-publish']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_PUBLISHED;
+                }
+                else if(isset($postData['save-draft']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_DRAFT;
+                }
+
                 if ($model->validate())
                     $success = true;
                 else
@@ -276,6 +295,14 @@ class PostsController extends Controller
         } else {
             if ($model->load(Yii::$app->request->post())) {
 
+                if(isset($postData['save-publish']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_PUBLISHED;
+                }
+                else if(isset($postData['save-draft']))
+                {
+                    $model->status = \mecsu\blog\models\Posts::STATUS_DRAFT;
+                }
                 // Get new URL for saved blog post
                 $newPostUrl = $model->getPostUrl(false);
 
@@ -311,6 +338,13 @@ class PostsController extends Controller
                             ]
                         )
                     );
+
+                    if(isset($postData['save-preview']))
+                    {
+                        $postURL = $model->getPostUrl(true, true);
+                        return $this->redirect($postURL);
+                    }
+
                 } else {
                     // Log activity
                     $this->module->logActivity(
@@ -352,14 +386,14 @@ class PostsController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
-    {
-        $model = $this->findModel($id);
-        return $this->render('view', [
-            'module' => $this->module,
-            'model' => $model
-        ]);
-    }
+    // public function actionView($id)
+    // {
+    //     $model = $this->findModel($id);
+    //     return $this->render('view', [
+    //         'module' => $this->module,
+    //         'model' => $model
+    //     ]);
+    // }
 
     /**
      * Deletes an existing Blog post model.
