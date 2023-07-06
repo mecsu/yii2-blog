@@ -599,7 +599,7 @@ class Posts extends ActiveRecordML
         if($this->status === self::STATUS_PUBLISHED)
         {
             // build slug url with hash
-            return "https://mecsu.vn/blog/{$this->alias}";
+            return "https://mecsu.vn/ho-tro-ky-thuat/{$this->alias}";
         }
         return $this->getModelUrl($withScheme, $realUrl);
     }

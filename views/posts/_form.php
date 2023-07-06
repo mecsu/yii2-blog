@@ -48,7 +48,7 @@ use wdmg\widgets\AliasInput;
                 'save' => Yii::t('app/modules/blog', 'Save')
             ],
             'options' => [
-                'baseUrl' => ($model->id) ? "https://mecsu.vn/blog/{$model->alias}": "https://mecsu.vn/blog/"
+                'baseUrl' => ($model->id) ? "https://mecsu.vn/ho-tro-ky-thuat/{$model->alias}": "https://mecsu.vn/ho-tro-ky-thuat/"
             ]
         ])->label(Yii::t('app/modules/blog', 'Post URL')); ?>
 
